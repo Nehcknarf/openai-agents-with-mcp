@@ -1,4 +1,5 @@
-# OpenAI Agents SDK with MCP (Baidu Maps MCP Server)
+# OpenAI Agents SDK with MCP (Baidu Maps MCP Server) Demo
+## OpenAI Agents SDK 调用百度地图 MCP Server Demo，支持替换模型为 DeepSeek-V3 等
 
 ## System Requirements
 - Latest version of uv installed

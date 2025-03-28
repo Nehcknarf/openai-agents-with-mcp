@@ -1,9 +1,10 @@
 import os
+import shutil
 import asyncio
 
 from openai import AsyncOpenAI
 from agents import Agent, Runner, gen_trace_id, trace
-from agents import set_default_openai_client, set_default_openai_api, set_tracing_disabled
+from agents import set_default_openai_client, set_default_openai_api, set_tracing_disabled, set_tracing_export_api_key
 from agents.mcp import MCPServer, MCPServerStdio
 
 from dotenv import load_dotenv
@@ -24,6 +25,7 @@ or call set_tracing_export_api_key() to set a tracing specific key.
 # set_default_openai_client(client=client, use_for_tracing=False)
 # set_default_openai_api("chat_completions")
 # set_tracing_disabled(disabled=True)
+# set_tracing_export_api_key(api_key=os.getenv('OPENAI_API_KEY'))
 
 
 async def run(mcp_server: MCPServer):
@@ -57,10 +59,14 @@ async def main():
             },
     ) as server:
         trace_id = gen_trace_id()
-        with trace(workflow_name="MCP Map Example", trace_id=trace_id):
+        with trace(workflow_name="MCP Baidu Maps Example", trace_id=trace_id):
             print(f"View trace: https://platform.openai.com/traces/{trace_id}\n")
             await run(server)
 
 
 if __name__ == "__main__":
+    # Let's make sure the user has npx installed
+    if not shutil.which("uv"):
+        raise RuntimeError("npx is not installed. Please install it with `npm install -g npx`.")
+
     asyncio.run(main())
