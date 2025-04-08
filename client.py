@@ -1,5 +1,4 @@
 import os
-import shutil
 import asyncio
 
 from openai import AsyncOpenAI
@@ -65,8 +64,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    # Let's make sure the user has npx installed
-    if not shutil.which("uv"):
-        raise RuntimeError("npx is not installed. Please install it with `npm install -g npx`.")
-
     asyncio.run(main())
